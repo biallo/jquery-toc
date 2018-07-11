@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>demo</title>
+  <style>
+    .wrapper {
+      width: 960px;
+      margin:  0 auto;
+    }
+
+    a {
+      cursor: pointer;
+      color: blue;
+    }
+
+    .toc-h2 {
+      margin-left: 20px
+    }
+
+    .toc-h3 {
+      margin-left: 40px
+    }
+
+    .toc-h4 {
+      margin-left: 60px
+    }
+
+    .toc-h5 {
+      margin-left: 80px
+    }
+  </style>
+
+  <script
+  src="https://code.jquery.com/jquery-2.1.4.js"
+  integrity="sha256-siFczlgw4jULnUICcdm9gjQPZkw/YPDqhQ9+nAOScE4="
+  crossorigin="anonymous"></script>
+  <script type="text/javascript" src="jquery-toc.js"></script>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="toc-switch">
+      <a id="toc">Open TOC</a>
+    </div>
+    <div class="content">
+      <h1 id="first">Like a rolling stone</h1>
+      <h2>Once upon a time you dressed so fine</h2>
+      <p>You threw the bums a dime in your prime didn't you</p>
+      <p>People'd call say beware doll you're bound to fall</p>
+      <p>You thought they were all kiddin' you</p>
+      <p>You used to laugh about</p>
+      <h2>Everybody that was hangin' out</h2>
+      <p>Now you don't talk so loud</p>
+      <p>Now you don't seem so proud</p>
+      <p>About having to be scrounging for your next meal</p>
+      <p>How does it feel</p>
+      <p>How does it feel</p>
+      <h3>To be without a home</h3>
+      <p>Like a complete unknown</p>
+      <p>Like a rolling stone</p>
+      <p>You've gone to the finest school all right miss lonely</p>
+      <p>But you know you only used to get juiced in it</p>
+      <p>Nobody's ever taught you how to live out on the street</p>
+      <p>And now you're gonna have to get used to it</p>
+      <p>You said you'd never compromise</p>
+      <p>With the mystery tramp but now you realize</p>
+      <p>He's not selling any alibis</p>
+      <p>As you stare into the vacuum of his eyes</p>
+      <p>And say do you want to make a deal</p>
+      <h4>How does it feel</h4>
+      <p>How does it feel</p>
+      <p>To be on your own</p>
+      <p>With no direction home</p>
+      <h4>A complete unknown</h4>
+      <p>Like a rolling stone</p>
+      <p>You never turned around to see the frowns on the jugglers and the clowns</p>
+      <p>When they all did tricks for you</p>
+      <p>You never understood that it ain't no good</p>
+      <p>You shouldn't let other people get your kicks for you</p>
+      <p>You used to ride on the chrome horse with your diplomat</p>
+      <h5>Who carried on his shoulder a siamese cat</h5>
+      <p>Ain't it hard when you discover that</p>
+      <p>He really wasn't where it's at</p>
+      <p>After he took from you everything he could steal</p>
+      <p>How does it feel</p>
+      <p>How does it feel</p>
+      <p>To have be on your own</p>
+      <h5>With no direction home</h5>
+      <p>Like a complete unknown</p>
+      <p>Like a rolling stone</p>
+      <h1>Princess on the steeple and all the pretty people</h1>
+      <p>They're all drinkin' thinkin' that they got it made</p>
+      <p>Exchanging all precious gifts</p>
+      <p>But you'd better take your diamond ring you'd better pawn it babe</p>
+      <p>You used to be so amused</p>
+      <p>At Napoleon in rags and the language that he used</p>
+      <p>Go to him now he calls you you can't refuse</p>
+      <p>When you ain't got nothing you got nothing to lose</p>
+      <h2>You're invisible now you got no secrets to conceal</h2>
+      <p>How does it feel</p>
+      <p>Ah how does it feel</p>
+      <p>To be on your own</p>
+      <h2 id="last">With no direction home</h2>
+      <p>Like a complete unknown</p>
+      <p>Like a rolling stone</p>
+    </div>
+  </div>
+
+  <script>
+    $('#toc').toc({
+      selectors: 'h1, h2, h3, h4, h5',
+      container: $('.content'),
+      status: true,
+      placeholder: '无',
+      onOpen: function(list) {
+        var $html = $('<div class="toc-wrapper"><p class="toc-title">Table of contents</p><div class="toc-list"></div></div>');
+
+        $html.find('.toc-list').html(list);
+        $('.content').before($html);
+
+        $(this).text('Close TOC');
+      },
+      onClose: function() {
+        $('.toc-wrapper').remove();
+        $(this).text('Open TOC');
+      }
+    });
+  </script>
+</body>
+</html>

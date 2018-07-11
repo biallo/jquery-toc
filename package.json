@@ -1,0 +1,12 @@
+{
+  "name": "jquery-toc",
+  "version": "1.0.0",
+  "description": "A jQuery Table of Contents Plugin",
+  "main": "jquery-toc.js",
+  "author": "Biallo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/biallo/jquery-toc.git/issues"
+  },
+  "homepage": "https://github.com/biallo/jquery-toc"
+}
