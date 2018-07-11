@@ -1,3 +1,1 @@
-# A jQuery Table of Contents Plugin
-
-Please see the demo.html
+# A jQuery table of contents plugin
