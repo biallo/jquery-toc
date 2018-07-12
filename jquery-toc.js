@@ -1,19 +1,21 @@
-(function ( $ ) {
+(function($) {
   $.fn.toc = function(options) {
     var defaults = {
       status: false,
       selectors: 'h1, h2, h3',
       container: $('body'),
       placeholder: 'Empty',
+      listTag: 'ol',
       onOpen: function() {},
       onClose: function() {}
     };
-   
-    var settings = $.extend( {}, defaults, options );
+
+    var settings = $.extend({}, defaults, options);
 
     var $btn = this,
-        $container = settings.container,
-        selectors = settings.selectors;
+      $container = settings.container,
+      selectors = settings.selectors,
+      listTag = '<' + settings.listTag + '/>';
 
     if (settings.status) {
       openToc();
@@ -29,15 +31,15 @@
 
     function openToc() {
       var tocItems = [],
-          j = 1,
-          list = '<ul>';
+        j = 1,
+        list = [$(listTag)];
 
       $container
         .find(selectors)
         .each(function(i, item) {
           var index = item.id || 'toc-' + j++,
-              text = item.textContent.trim(),
-              className = 'toc-' + item.tagName.toLowerCase();
+            text = item.textContent.trim(),
+            tagName = item.tagName.toLowerCase();
 
           if (item.id != index) {
             $(item).data('toc-id', true);
@@ -47,22 +49,40 @@
           tocItems.push({
             index: index,
             text: text,
-            className: className
+            tagName: tagName
           });
         });
 
       if (tocItems.length) {
+        var selectorsArr = selectors.split(','),
+          currentLevel = 0;
+
         $.each(tocItems, function(i, item) {
-          list += '<li class="' + item.className + '"><a href="#' + item.index + '">' + item.text + '</a></li>';
+
+          var level = $.map(selectorsArr, function(selector, j) {
+            return item.tagName === selector.trim() ? j : undefined;
+          })[0];
+
+          if (level > currentLevel) {
+            var parentLi = list[0].children('li:last')[0];
+
+            if (parentLi) {
+              list.unshift($(listTag).appendTo(parentLi));
+            }
+          } else {
+            list.splice(0, Math.min(currentLevel - level, Math.max(list.length - 1, 0)));
+          }
+
+          list[0].append('<li><a href="#' + item.index + '">' + item.text + '</a></li>');
+
+          currentLevel = level;
         });
       } else {
-        list += '<li class="toc-empty">' + settings.placeholder + '</li>';
+        list[0].append('<li class="toc-empty">' + settings.placeholder + '</li>');
       }
-
-      list += '</ul>';
-
+      
       settings.status = true;
-      settings.onOpen.call($btn, list);
+      settings.onOpen.call($btn, list[list.length - 1]);
     }
 
     function closeToc() {
@@ -80,5 +100,5 @@
       settings.onClose.call($btn);
     }
   };
- 
-}( jQuery ));
+
+}(jQuery));

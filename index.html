@@ -15,20 +15,8 @@
       color: blue;
     }
 
-    .toc-h2 {
-      margin-left: 20px
-    }
-
-    .toc-h3 {
-      margin-left: 40px
-    }
-
-    .toc-h4 {
-      margin-left: 60px
-    }
-
-    .toc-h5 {
-      margin-left: 80px
+    .toc-empty {
+      list-style: none;
     }
   </style>
 
@@ -101,7 +89,7 @@
       <p>How does it feel</p>
       <p>Ah how does it feel</p>
       <p>To be on your own</p>
-      <h2 id="last">With no direction home</h2>
+      <h2>With no direction home</h2>
       <p>Like a complete unknown</p>
       <p>Like a rolling stone</p>
     </div>
@@ -113,6 +101,7 @@
       container: $('.content'),
       status: true,
       placeholder: '无',
+      listTag: 'ol',
       onOpen: function(list) {
         var $html = $('<div class="toc-wrapper"><p class="toc-title">Table of contents</p><div class="toc-list"></div></div>');
 
