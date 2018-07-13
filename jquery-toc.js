@@ -38,7 +38,7 @@
         .find(selectors)
         .each(function(i, item) {
           var index = item.id || 'toc-' + j++,
-            text = item.textContent.trim(),
+            text = $('<div/>').text(item.textContent.trim()).html(),
             tagName = item.tagName.toLowerCase();
 
           if (item.id != index) {

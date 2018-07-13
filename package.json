@@ -1,6 +1,6 @@
 {
   "name": "jquery-toc",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A jQuery Table of Contents Plugin",
   "main": "jquery-toc.js",
   "author": "Biallo",
